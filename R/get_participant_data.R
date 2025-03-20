@@ -30,5 +30,7 @@ get_participant_data <- function(include_demographics=TRUE)
       dplyr::left_join(demographics, by = "airtable_record_id")
   }
 
+  participants <- select(-airtable_record_id)
+
   return(participants)
 }
