@@ -13,7 +13,9 @@ get_participant_data <- function(include_demographics=TRUE)
       dplyr::as_tibble() |>
       dplyr::select(-airtable_record_id) |>
       dplyr::mutate(airtable_record_id = unlist(subject_id)) |>
-      dplyr::select(-subject_id, -demographics_primary_key)
+      dplyr::select(-subject_id, -demographics_primary_key) |>
+      dplyr::mutate(date_birth_rounded = lubridate::ymd(date_birth_rounded),
+                    date_started_recording = lubridate::ymd(date_started_recording))
   }
 
   participants_table <- rairtable::airtable(table = 'tbl5YIcTCibyia5gJ', base = 'appQ7P6moc6knzYzN')
@@ -21,16 +23,14 @@ get_participant_data <- function(include_demographics=TRUE)
     dplyr::as_tibble() |>
     dplyr::select(-Recordings, -`Blackout & Muted Videos`, -`BV-Main Demographics`) |>
     dplyr::mutate(dataset = lapply(dataset, \(x) ifelse(is.null(x), NA, x))) |>
-    dplyr::mutate(dataset = unlist(dataset),
-                  date_birth_rounded = lubridate::ymd(date_birth_rounded),
-                  date_started_recording = lubridate::ymd(date_started_recording))
+    dplyr::mutate(dataset = unlist(dataset))
 
   if (include_demographics) {
     participants <- participants |>
       dplyr::left_join(demographics, by = "airtable_record_id")
   }
 
-  participants <- select(-airtable_record_id)
+  participants <- dplyr::select(participants, -airtable_record_id)
 
   return(participants)
 }
