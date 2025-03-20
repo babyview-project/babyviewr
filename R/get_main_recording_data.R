@@ -19,5 +19,7 @@ get_main_recording_data <- function(include_luna = FALSE)
   rairtable::read_airtable(table, id_to_col = TRUE) |>
     dplyr::as_tibble() |>
     dplyr::select(-airtable_record_id) |>
-    dplyr::mutate(subject_id = unlist(subject_id))
+    dplyr::mutate(subject_id = unlist(subject_id),
+                  date_time = lubridate::ymd_hms(date_time))
+
 }
