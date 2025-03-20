@@ -30,7 +30,9 @@ get_participant_data <- function(include_demographics=TRUE)
       dplyr::left_join(demographics, by = "airtable_record_id")
   }
 
-  participants <- dplyr::select(participants, -airtable_record_id)
+  participants <- dplyr::rename(participants,
+                                subject_id_internal = subject_id,
+                                subject_id = airtable_record_id)
 
   return(participants)
 }
