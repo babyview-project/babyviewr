@@ -20,7 +20,7 @@ get_participant_data <- function(include_demographics=TRUE)
   participants <- rairtable::read_airtable(participants_table, id_to_col = TRUE) |>
     dplyr::as_tibble() |>
     dplyr::select(-Recordings, -`Blackout & Muted Videos`, -`BV-Main Demographics`) |>
-    dplyr::mutate(dataset = lapply(participants$dataset, \(x) ifelse(is.null(x), NA, x))) |>
+    dplyr::mutate(dataset = lapply(dataset, \(x) ifelse(is.null(x), NA, x))) |>
     dplyr::mutate(dataset = unlist(dataset))
 
   if (include_demographics) {
