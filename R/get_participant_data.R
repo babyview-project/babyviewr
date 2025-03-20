@@ -22,7 +22,7 @@ get_participant_data <- function(include_demographics=TRUE)
     dplyr::select(-Recordings, -`Blackout & Muted Videos`, -`BV-Main Demographics`) |>
     dplyr::mutate(dataset = lapply(dataset, \(x) ifelse(is.null(x), NA, x))) |>
     dplyr::mutate(dataset = unlist(dataset),
-                  date_birth_rounded = lubridate::ymd(date_birth_rounded)
+                  date_birth_rounded = lubridate::ymd(date_birth_rounded),
                   date_started_recording = lubridate::ymd(date_started_recording))
 
   if (include_demographics) {
