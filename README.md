@@ -26,6 +26,6 @@ First, install the airtable r package
 install.packages('rairtable')
 ```
 
-1. Generate an Airtable API key from your Airtable account page.
+1. Generate an Airtable API key from your Airtable account page. See. .jpg with screenshot of what your config should look like.
 2. pass the result to `rairtable::set_airtable_api_key('MY_KEY_HERE')`.
 3. Store the key in your .Renviron file for use in the future using `set_airtable_api_key('MY_KEY_HERE', install = TRUE)`.
