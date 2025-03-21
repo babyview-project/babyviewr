@@ -21,6 +21,11 @@ remotes::install_github("babyviewr")
 
 This package depends on `rairtable` and so you will likely need to set up an airtable Personal Access Token (PAT) via the following instructions (copied from the `rairtable` README):
 
+First, install the airtable r package
+```{r}
+install.packages('rairtable')
+```
+
 1. Generate an Airtable API key from your Airtable account page.
-2. pass the result to `set_airtable_api_key('MY_KEY_HERE')`.
+2. pass the result to `rairtable::set_airtable_api_key('MY_KEY_HERE')`.
 3. Store the key in your .Renviron file for use in the future using `set_airtable_api_key('MY_KEY_HERE', install = TRUE)`.
